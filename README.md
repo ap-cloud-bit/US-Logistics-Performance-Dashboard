@@ -99,3 +99,39 @@ Highlights geographic distribution and monthly performance.
 ---
 
 # 🗂 Recommended Repository Structure
+US-Logistics-Performance-Dashboard/
+│
+├── README.md
+├── LICENSE
+│
+├── powerbi/
+│     └── logistics_dashboard.pbix
+│
+├── data/
+│     └── shipments.csv
+│
+└── screenshots/
+      ├── page1_executive_summary.png
+      ├── page2_carrier_performance.png
+      └── page3_geo_trend.png
+
+---
+
+# 📐 Sample DAX Used
+
+```DAX
+Total Shipments = COUNTROWS(Shipments)
+
+OnTime Rate =
+DIVIDE(
+    CALCULATE(COUNTROWS(Shipments), Shipments[Status] = "Delivered"),
+    [Total Shipments]
+)
+
+Delay Rate =
+DIVIDE(
+    CALCULATE(COUNTROWS(Shipments), Shipments[Status] = "Delayed"),
+    [Total Shipments]
+)
+
+Avg Transit Days = AVERAGE(Shipments[TransitDays])
